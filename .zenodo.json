@@ -1,0 +1,31 @@
+{
+  "title": "PhaseRetrieval.jl",
+  "upload_type": "software",
+  "description": "<p>Julia package for phase retrieval and wavefront sensing from intensity measurements: point spread function models (including vectorial and Shack-Hartmann), diversity-based phase retrieval problems and their solution with projection-based algorithms.</p>",
+  "creators": [
+    {
+      "name": "Soloviev, Oleg",
+      "affiliation": "Flexible Optical B.V. (OKO Technologies)",
+      "orcid": "0000-0003-3761-9192"
+    }
+  ],
+  "license": "MIT",
+  "access_right": "open",
+  "version": "0.1.0",
+  "keywords": [
+    "phase retrieval",
+    "wavefront sensing",
+    "point spread function",
+    "phase diversity",
+    "adaptive optics",
+    "Julia"
+  ],
+  "grants": [
+    {
+      "id": "10.13039/501100000780::826589"
+    },
+    {
+      "id": "10.13039/501100000780::101111948"
+    }
+  ]
+}

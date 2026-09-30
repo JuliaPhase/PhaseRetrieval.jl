@@ -28,11 +28,11 @@ jobs:
         run: |
           julia --project=docs -e '
             using Pkg
-            Pkg.add(url = "https://github.com/olejorik/AlternatingProjections.jl", rev= "develop")
-            Pkg.add(url = "https://github.com/olejorik/SampledDomains.jl")
-            Pkg.add(url = "https://github.com/olejorik/PhaseUtils.jl")
-            Pkg.add(url = "https://github.com/olejorik/PhasePlots.jl")
-            Pkg.add(url = "https://github.com/olejorik/PhaseBases.jl")
+            Pkg.add(url = "https://github.com/JuliaPhase/AlternatingProjections.jl", rev= "develop")
+            Pkg.add(url = "https://github.com/JuliaPhase/SampledDomains.jl")
+            Pkg.add(url = "https://github.com/JuliaPhase/PhaseUtils.jl")
+            Pkg.add(url = "https://github.com/JuliaPhase/PhasePlots.jl")
+            Pkg.add(url = "https://github.com/JuliaPhase/PhaseBases.jl")
             Pkg.develop(PackageSpec(path=pwd()))
             Pkg.instantiate()'
       - name: Build and deploy

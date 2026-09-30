@@ -17,5 +17,5 @@ keywords:
   - "adaptive optics"
   - "Julia"
 license: MIT
-repository-code: "https://github.com/olejorik/PhaseRetrieval.jl"
+repository-code: "https://github.com/JuliaPhase/PhaseRetrieval.jl"
 version: "0.1.0"

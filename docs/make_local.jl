@@ -1,6 +1,6 @@
 using Pkg
-Pkg.add(url = "https://github.com/olejorik/AlternatingProjections.jl", rev= "develop"); 
-Pkg.add(url = "https://github.com/olejorik/SampledDomains.jl");
+Pkg.add(url = "https://github.com/JuliaPhase/AlternatingProjections.jl", rev= "develop"); 
+Pkg.add(url = "https://github.com/JuliaPhase/SampledDomains.jl");
 Pkg.develop(PackageSpec(path=pwd()))
 Pkg.instantiate()
 # cd(@__DIR__)
@@ -16,17 +16,17 @@ DocMeta.setdocmeta!(PhaseRetrieval, :DocTestSetup, :(using PhaseRetrieval); recu
 makedocs(;
     modules=[PhaseRetrieval],
     authors="Oleg Soloviev",
-    repo="https://github.com/olejorik/PhaseRetrieval.jl/blob/{commit}{path}#L{line}",
+    repo="https://github.com/JuliaPhase/PhaseRetrieval.jl/blob/{commit}{path}#L{line}",
     sitename="PhaseRetrieval.jl",
     # format=Documenter.HTML(;
         # prettyurls=get(ENV, "CI", "false") == "true",
-        # canonical="https://olejorik.github.io/PhaseRetrieval.jl",
+        # canonical="https://juliaphase.github.io/PhaseRetrieval.jl",
         # assets=String[],
     # ),
     format = Documenter.HTML(
         # Use clean URLs, unless built as a "local" build
         prettyurls=get(ENV, "CI", "false") == "true",
-        canonical = "https://olejorik.github.io/PhaseRetrieval.jl/stable/",
+        canonical = "https://juliaphase.github.io/PhaseRetrieval.jl/stable/",
         assets = ["assets/favicon.ico"],
         highlights = ["yaml"],
     ),
@@ -37,7 +37,7 @@ makedocs(;
 )
 
 deploydocs(;
-    repo="github.com/olejorik/PhaseRetrieval.jl.git",
+    repo="github.com/JuliaPhase/PhaseRetrieval.jl.git",
     target = "build",
 )
 

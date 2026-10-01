@@ -21,3 +21,8 @@ Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
 test = ["Test"]
+
+[sources]
+AlternatingProjections = {url = "https://github.com/JuliaPhase/AlternatingProjections.jl", rev = "master"}
+PhaseBases = {url = "https://github.com/JuliaPhase/PhaseBases.jl", rev = "main"}
+SampledDomains = {url = "https://github.com/JuliaPhase/SampledDomains.jl", rev = "main"}

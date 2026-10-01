@@ -196,8 +196,11 @@ airysize(c::SimConfig) = 1.22 * wavelength(c) * focallength(c) / apdiameter(c)
 
 
 function gaussian_apodization(aplevel, conf::SimConfig)
+    ## TODO: SampledDomain used to call f(y, x) instead of f(x, y); the lambda was adapted so
+    ## the result is unchanged, i.e. aplevel[1] acts along y (the first array index) and
+    ## aplevel[2] along x. Check whether this was intended.
     qqq = SampledDomains.SampledDomain(
-        (x, y) -> exp(x^2 * log(aplevel[1]) + y^2 * log(aplevel[2])),
+        (x, y) -> exp(y^2 * log(aplevel[1]) + x^2 * log(aplevel[2])),
         2 / apdiameter(conf) * conf.dualroi,
     )
     return qqq.vals

@@ -2,7 +2,7 @@
 using FFTW
 using MappedArrays
 
-export AutoExposure, FixedExposure, PSFMethods, PSFExposure
+export AutoExposure, FixedExposure, PSFMethods, PSFExposure, strehl_exposure
 export wavelength, airysize, diversed_psfs, throughfocus, doflength, ab_free_psf
 using SampledDomains
 
@@ -207,6 +207,27 @@ function gaussian_apodization(aplevel, conf::SimConfig)
 end
 
 FixedExposure(conf::SimConfig) = FixedExposure(sum(conf.ap)^2)
+
+"""
+    strehl_exposure(conf::SimConfig; vectorial=haskey(conf.modulation, "vectorial")) -> FixedExposure
+
+Exposure that images the peak of the aberration-free PSF of `conf` as 1, so that the image
+values are in units of the Strehl ratio (as the "relative intensity" of Zemax). The
+aberration-free PSF has the aperture of `conf` with its apodisation, no aberration and no
+diversity, and with `vectorial=true` the channels `conf.modulation["vectorial"]`; set
+`vectorial` to the model the PSFs are computed with (`diversed_psfs` scalar,
+`vectorial_diversed_psfs` vectorial). Its peak is at the centre: |Σ ap|² for the scalar PSF
+(the same as `FixedExposure(conf)`), Σ_c |Σ ap ⋅ m_c|² for the vectorial one. Aberrated or
+defocused frames then stay below 1, while `FixedExposure(conf)` clips the vectorial PSF, whose
+peak exceeds |Σ ap|² (obliquity factor ≥ 1, two input polarisations for the random one).
+"""
+function strehl_exposure(conf::SimConfig; vectorial::Bool=haskey(conf.modulation, "vectorial"))
+    ap = aperture(conf)
+    vectorial || return FixedExposure(abs2(sum(ap)))
+    m = conf.modulation["vectorial"]
+    channels = reshape(m, size(m, 1), size(m, 2), :)
+    return FixedExposure(sum(abs2(sum(ap .* view(channels, :, :, c))) for c in axes(channels, 3)))
+end
 
 import PhaseBases: ZernikeBW, ModalPhase
 ZernikeBW(c::SimConfig{PSFMethods.Fourier}, order=10; kwargs...) =

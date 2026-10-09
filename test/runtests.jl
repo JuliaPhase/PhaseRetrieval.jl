@@ -120,6 +120,19 @@ using Test
         396 504 612
     ]
 
+    ## binning: the mean of Q × Q cells; rows and columns beyond the last whole cell dropped
+    A = reshape(1.0:20.0, 4, 5)
+    @test PhaseRetrieval.binning(A, 2) == [3.5 11.5; 5.5 13.5]
+    @test PhaseRetrieval.binning(A, 1) == A
+    B = rand(7, 9)
+    @test size(PhaseRetrieval.binning(B, 3)) == (2, 3)
+    @test sum(PhaseRetrieval.binning(B, 3)) * 9 ≈ sum(B[1:6, 1:9])
+    E = PhaseRetrieval.N0f8.(reshape(0:35, 6, 6) ./ 255)
+    @test eltype(PhaseRetrieval.binning(E, 3)) == Float64
+    @test PhaseRetrieval.binning(E, 3) ≈ PhaseRetrieval.binning(Float64.(E), 3)
+    cam = PhaseRetrieval.binning(CameraChip((5.2e-6, 5.2e-6), (640, 481), 8, 8), 2)
+    @test cam.pixelsize == (10.4e-6, 10.4e-6) && cam.imagesize == (320, 240)
+
 end
 
 @testset "Field.jl" begin

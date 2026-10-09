@@ -5,6 +5,13 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
 
 ## [Unreleased]
 
+### Documentation
+- `binning(arr, Q)`: the docstring said the cells are replaced by the sum of their elements;
+  they are replaced by the mean (sum / Q²), as before. Now documented: the result is `Float64`
+  also for fixed-point input, the rows and columns beyond the last whole cell are dropped, and
+  for odd sizes the centre `n ÷ 2 + 1` of the binned grid is not the binned old centre. Tests
+  for `binning` (arrays, `N0f8`, `CameraChip`).
+
 ### Added
 - `strehl_exposure(conf; vectorial)` — exposure that images the peak of the aberration-free
   PSF of `conf` (same aperture and apodisation, scalar or vectorial channels) as 1, so that the

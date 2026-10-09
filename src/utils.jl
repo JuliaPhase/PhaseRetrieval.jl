@@ -183,7 +183,18 @@ end
 """
     binning(arr, Q)
 
-Downsample  `arr`ay by replacing quadratic cells of size `Q × Q` by summ of its elements
+Downsample `arr`ay by replacing square cells of size `Q × Q` by the **mean** of their elements
+(the sum divided by `Q²`, so the values keep their scale; multiply by `Q²` for the sum, e.g. the
+photon counts of a binned camera). The result is `Float64` also for fixed-point input (e.g.
+`N0f8` of an 8-bit image).
+
+The cells start at `arr[1, 1]`; rows and columns beyond the last whole cell are dropped, so an
+`M × N` array gives `(M ÷ Q) × (N ÷ Q)`. With the FFT convention of the centre at index
+`n ÷ 2 + 1`, the centre of the binned grid is then not the binned image of the old centre in
+general (e.g. 201 → 100 with `Q = 2`: the new centre 51 covers the old indices 101–102); crop
+the array first if the position matters.
+
+See also `binning(::CameraChip, n)` for the camera of the binned images (pixel × `n`).
 """
 function binning(arr::AbstractMatrix, Q::Integer)
     m, n = size(arr) .÷ Q

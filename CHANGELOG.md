@@ -19,5 +19,4 @@ Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/).
   `FixedExposure(conf)` (the scalar peak |Σ ap|²) it does not clip vectorial PSFs, whose peak
   exceeds |Σ ap|² (obliquity factor cos^(−1/2) ≥ 1, two input polarisations for the random one).
 - `CHANGELOG.md` — started tracking changes following Keep a Changelog format
-- `.github/copilot-instructions.md` — added project context for GitHub Copilot (key types, exported functions, relationships, source layout)
 

@@ -20,7 +20,3 @@ PhasePlots = {url = "https://github.com/JuliaPhase/PhasePlots.jl", rev = "main"}
 PhaseRetrieval = {path = ".."}
 PhaseUtils = {url = "https://github.com/JuliaPhase/PhaseUtils.jl", rev = "main"}
 SampledDomains = {url = "https://github.com/JuliaPhase/SampledDomains.jl", rev = "main"}
-
-[compat]
-# Makie 0.24.15 breaks contour! on NaN-masked data (MakieOrg/Makie.jl#5812, fixed upstream, not released yet); remove the pin once a release with the fix is out
-Makie = "=0.24.14"

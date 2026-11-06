@@ -1,7 +1,7 @@
 name = "PhaseRetrieval"
 uuid = "223879fc-9d59-4b08-8977-2bca214a0849"
 authors = ["Oleg Soloviev <oleg.soloviev@gmail.com> and contributors"]
-version = "0.1.0"
+version = "0.2.0"
 
 [deps]
 AlternatingProjections = "37589ef0-cc9c-11e9-2e35-d5d8b7f5a2df"

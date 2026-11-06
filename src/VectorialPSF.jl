@@ -27,7 +27,7 @@ Calculate polarization field components (exx, eyx, ezx, exy, eyy, ezy) for vecto
 function get_polarization_magnitudes(conf::SimConfig)
     ddom = conf.dualroi * (1 / focallength(conf))
     inaperture = (!isnan).(conf.mask)
-    # σx, σy = getranges(ddom)
+    σx, σy = getranges(ddom)
     # exx = Array{Float64}(undef, size(ddom))
     # eyx = Array{Float64}(undef, size(ddom))
     # ezx = Array{Float64}(undef, size(ddom))
@@ -40,7 +40,10 @@ function get_polarization_magnitudes(conf::SimConfig)
     exy = zeros(size(ddom))
     eyy = zeros(size(ddom))
     ezy = zeros(size(ddom))
-    for (i, (y, x)) in enumerate(ddom)
+    # by the indices, not by iterating over the domain: the point of a sample was [y, x] in
+    # SampledDomains 0.1 and is SVector(x, y) since 0.2
+    for i in CartesianIndices(inaperture)
+        x, y = σx[i[2]], σy[i[1]]
         if inaperture[i]
             zfactor = 1 / (1 + σz(x, y))
             exx[i] = 1 - x^2 * zfactor
@@ -63,7 +66,9 @@ function get_obliquity_factor(conf::SimConfig)
     ddom = conf.dualroi * (1 / focallength(conf))
     inaperture = (!isnan).(conf.mask)
     ret = ones(size(ddom))
-    for (i, (y, x)) in enumerate(ddom)
+    σx, σy = getranges(ddom)
+    for i in CartesianIndices(inaperture)       # by the indices, see get_polarization_magnitudes
+        x, y = σx[i[2]], σy[i[1]]
         if inaperture[i]
             ret[i] = 1 / sqrt(real(σz(x, y)))
         end

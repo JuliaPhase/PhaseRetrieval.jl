@@ -14,6 +14,7 @@ SampledDomains = "a82262f3-35bb-4fed-9e1b-5653a3e90076"
 Statistics = "10745b16-79ce-11e8-11f9-7d13ad32a3b2"
 
 [compat]
+SampledDomains = "0.2"
 julia = "1.11"
 
 [extras]
